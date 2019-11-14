@@ -37,7 +37,7 @@ module.exports = () => layout(html`
     <div>
       <label class="col-sm-2 control-label">Status</label>
       <div class="col-sm-10">
-        <input id="status" name="status" type="radio" value="open"/> Open
+        <input id="status" name="status" type="radio" value="open" checked/> Open
         <input id="status" name="status" type="radio" value="closed"/> Closed
       </div>
     </div>

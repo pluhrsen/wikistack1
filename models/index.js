@@ -11,20 +11,24 @@ const Page = db.define('page', {
   slug: {
     type: Sequelize.STRING,
     allowNull: false,
-    validate: {
-      isURL: true
-    }
   },
   content: {
     type: Sequelize.TEXT,
     allowNull: false
   },
   status: {
-    type: Sequelize.ENUM('open', 'close')
+    type: Sequelize.ENUM('open', 'closed')
   }
 })
 
-// Page.beforeValidate(const slug = title.replace(/\s+/g, "_").replace(/\W/g, "");)
+const generateSlug = title => {
+  return title.replace(/\s+/g, "_").replace(/\W/g, "");
+}
+
+Page.beforeValidate(page => {
+  page.slug = generateSlug(page.title);
+})
+
 
 const User = db.define('user', {
   name: {
@@ -39,6 +43,8 @@ const User = db.define('user', {
     }
   }
 })
+
+Page.belongsTo(User, { as: 'author' });
 
 module.exports = {
   Page, User, db

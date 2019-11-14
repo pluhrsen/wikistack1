@@ -1,6 +1,7 @@
 const morgan = require("morgan");
 const express = require("express");
 // const layout = require("./views/layout");
+const { main } = require("./views");
 const { Page, User, db } = require('./models');
 const userRoutes = require("./routes/user");
 const wikiRoutes = require("./routes/wiki");
@@ -19,7 +20,7 @@ then(() => {
 
 
 app.get("/", (req, res) => {
-  res.redirect("/wiki");
+  res.redirect('/wiki')
 })
 
 
@@ -28,8 +29,8 @@ const port = 3000;
 
 const mainModels = async () => {
 
-  await db.sync({force: true});
-  await db.close();
+  await db.sync();
+  //{force: true}
 
   app.listen(port);
 }
